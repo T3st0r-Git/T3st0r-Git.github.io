@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="网络安全,渗透测试,安全开发"><title>驭风信息安全攻防竞技平台 | T3st0r's Blog</title><link rel="stylesheet" type="text/css" href="//fonts.neworld.org/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">驭风信息安全攻防竞技平台</h1><a id="logo" href="/.">T3st0r's Blog</a><p class="description">下棋的旗子，耍猴的猴。</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">驭风信息安全攻防竞技平台</h1><div class="post-meta"><a href="/2018/09/06/YuFeng_AWD_Platform/#comments" class="comment-count"></a><p><span class="date">Sep 06, 2018</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><p>驭风 ， 一款多样化, 可自定义的 “信息安全攻防竞技平台”（苏安天下信息安全攻防研究室 版权所有）。</p>
+<h3 id="后台比赛配置"><a href="#后台比赛配置" class="headerlink" title="后台比赛配置"></a>后台比赛配置</h3><a id="more"></a>
+<h4 id="后台登录"><a href="#后台登录" class="headerlink" title="后台登录"></a>后台登录</h4><blockquote>
+<p><strong>管理员登录web后台配置比赛相关信息</strong></p>
+</blockquote>
+<p>打开平台，根据页面提示进入<code>后台管理页面</code>：</p>
+<p><img src="./1529931729812.png" alt="Alt text"></p>
+<p>默认账号密码信息如下：</p>
+<blockquote>
+<p>账号：<a href="mailto:`admin@admin.com" target="_blank" rel="noopener">`admin@admin.com</a><code>账号：</code>123456`</p>
+</blockquote>
+<p>进入后台后主界面如下：</p>
+<p><img src="./1529931974480.png" alt="Alt text"></p>
+<h4 id="比赛配置"><a href="#比赛配置" class="headerlink" title="比赛配置"></a>比赛配置</h4><p>点击菜单栏<code>赛队设置</code>，进行比赛队伍配置：</p>
+<p><img src="./1529932067260.png" alt="Alt text"></p>
+<p>设置完毕如下：</p>
+<p><img src="./1529932083966.png" alt="Alt text"></p>
+<p>点击菜单栏<code>比赛选项配置</code>，进行比赛选项相关配置：</p>
+<p><img src="./1529932175765.png" alt="Alt text"></p>
+<p>如下选择比赛靶场环境：<br>（目前有18套靶场环境可选，附专项练习）</p>
+<p><img src="./1529932259420.png" alt="Alt text"></p>
+<p>如下可以直接进行：</p>
+<blockquote>
+<ul>
+<li>配置每队靶机数量</li>
+<li>配置比赛时长</li>
+<li>配置每轮flag自动刷新时间间隔</li>
+</ul>
+</blockquote>
+<p><img src="./1529932389024.png" alt="Alt text"></p>
+<p>配置好相关参数后，点击<code>提交配置并启动靶机</code>。<br>如此提交配置到服务器，并启动靶机，此时靶机无flag。</p>
+<p><img src="./1529931923348.png" alt="Alt text"></p>
+<p>靶机启动完毕后，随时可以开始比赛。<br>点击最下方的<code>已提交配置，开始比赛</code>按钮，开始比赛：</p>
+<p><img src="./1529932531918.png" alt="Alt text"></p>
+<h4 id="靶场相关"><a href="#靶场相关" class="headerlink" title="靶场相关"></a>靶场相关</h4><blockquote>
+<p>靶场统计</p>
+</blockquote>
+<p>附靶场漏洞情况与通关参考文档：</p>
+<p><img src="./1529980675386.png" alt="Alt text"></p>
+<p>比赛平台开发方向定位为框架式平台，赛方或教职工可自行添加比赛靶场或题目，或专项练习。<br>靶场模板如下：</p>
+<p><img src="./1529980516042.png" alt="Alt text"></p>
+<h4 id="控制面板"><a href="#控制面板" class="headerlink" title="控制面板"></a>控制面板</h4><p>后台存在<code>控制面板</code>，可以进行以下操作：</p>
+<blockquote>
+<ul>
+<li>关闭所有靶机</li>
+<li>修复异常靶机</li>
+<li>重置所有靶机的flag</li>
+<li>还原指定队伍靶机</li>
+</ul>
+</blockquote>
+<p><img src="./1529932712157.png" alt="Alt text"></p>
+<blockquote>
+<p>eg: 关闭所有靶机</p>
+</blockquote>
+<p><img src="./1529933012177.png" alt="Alt text"></p>
+<p>查看flag面板可以查看每队此回合的flag值：</p>
+<p><img src="./1529932636896.png" alt="Alt text"></p>
+<h3 id="学员功能"><a href="#学员功能" class="headerlink" title="学员功能"></a>学员功能</h3><h4 id="队员登录"><a href="#队员登录" class="headerlink" title="队员登录"></a>队员登录</h4><p>学员通过主页<code>队员登录</code>按钮登录：</p>
+<p><img src="./1529932861581.png" alt="Alt text"></p>
+<p>登陆后如下：</p>
+<blockquote>
+<p>学员可以在此页面直接看到自己当前的比赛状态如：比分、排名</p>
+</blockquote>
+<p><img src="./1529933104616.png" alt="Alt text"></p>
+<h4 id="比赛信息"><a href="#比赛信息" class="headerlink" title="比赛信息"></a>比赛信息</h4><blockquote>
+<p>比赛说明</p>
+</blockquote>
+<p><img src="./1529934041709.png" alt="Alt text"></p>
+<blockquote>
+<p>查看网络拓扑</p>
+</blockquote>
+<p><img src="./1529934081128.png" alt="Alt text"></p>
+<h4 id="比赛过程"><a href="#比赛过程" class="headerlink" title="比赛过程"></a>比赛过程</h4><blockquote>
+<p>实例：攻击漏洞靶机，获取flag</p>
+</blockquote>
+<p><img src="./1529976602505.png" alt="Alt text"></p>
+<blockquote>
+<p>提交flag</p>
+</blockquote>
+<p><img src="./1529976821258.png" alt="Alt text"></p>
+<p>加固时间无法提交flag：</p>
+<p><img src="./1529932614655.png" alt="Alt text"></p>
+<p>支持批量提交：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `cat /f.txt|awk <span class="string">'xxxxxx'</span>`;<span class="keyword">do</span> curl http://172.20.10.9/commit.php -d <span class="variable">$i</span> -m 3;<span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#post_data:ip=xxx.xxx.xxx.xxx&amp;flag=xxxxxxxxxxxx</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="实时排行榜"><a href="#实时排行榜" class="headerlink" title="实时排行榜"></a>实时排行榜</h4><blockquote>
+<p>查看实时排行榜</p>
+</blockquote>
+<p>统计分数，包括：各队总分(含防御得分)，防御得分，实时分数变化状态，攻击源，攻击事件发生时间，裁判机检测记录与扣分记录等</p>
+<p><img src="./1529979833387.png" alt="Alt text"></p>
+<h3 id="反作弊机制"><a href="#反作弊机制" class="headerlink" title="反作弊机制"></a>反作弊机制</h3><blockquote>
+<p>查看违规记录</p>
+</blockquote>
+<p>反作弊机制，可对违规严重的队伍进行一键还原靶机：</p>
+<p><img src="./1529980352725.png" alt="Alt text"></p>
+<h3 id="演示视频"><a href="#演示视频" class="headerlink" title="演示视频"></a>演示视频</h3><p>此是旧版，暂未有时间更新新版平台的功能演示视频。</p>
+<video id="video" controls preload="none" poster=""><br>      <source id="mp4" src="./yufeng.mp4" type="video/mp4"><br>      </video>
+</div><div class="tags"><a href="/tags/AWD/">AWD</a><a href="/tags/开发/">开发</a></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/2018/09/04/fuck_postgres/" class="next">fuck_postgres</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#后台比赛配置"><span class="toc-text">后台比赛配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#后台登录"><span class="toc-text">后台登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#比赛配置"><span class="toc-text">比赛配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#靶场相关"><span class="toc-text">靶场相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#控制面板"><span class="toc-text">控制面板</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学员功能"><span class="toc-text">学员功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#队员登录"><span class="toc-text">队员登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#比赛信息"><span class="toc-text">比赛信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#比赛过程"><span class="toc-text">比赛过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实时排行榜"><span class="toc-text">实时排行榜</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反作弊机制"><span class="toc-text">反作弊机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#演示视频"><span class="toc-text">演示视频</span></a></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/YuFeng_AWD_Platform/">驭风信息安全攻防竞技平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/04/fuck_postgres/">fuck_postgres</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/03/mail_fishing/">邮件伪造钓鱼</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/09/custom_command_dll/">custom_command_dll</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/08/build_hexo_blog/">build_hexo_blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/08/fuck_mysql/">fuck_mysql</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/sql-injection-cheatsheet/">SQL注入速查表</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/AWD/" style="font-size: 15px;">AWD</a> <a href="/tags/开发/" style="font-size: 15px;">开发</a> <a href="/tags/杂项/" style="font-size: 15px;">杂项</a> <a href="/tags/提权/" style="font-size: 15px;">提权</a> <a href="/tags/神器/" style="font-size: 15px;">神器</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/自动化/" style="font-size: 15px;">自动化</a> <a href="/tags/社会工程学/" style="font-size: 15px;">社会工程学</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/注入/" style="font-size: 15px;">注入</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Sitemap</a> |<a href="/atom.xml">订阅</a> |<a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">T3st0r.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="#"> Blog.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script></body></html>
