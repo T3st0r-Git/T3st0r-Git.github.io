@@ -1,0 +1,122 @@
+<h2 id="分块传输编码在WEB安全中的应用"><a href="#分块传输编码在WEB安全中的应用" class="headerlink" title="分块传输编码在WEB安全中的应用"></a>分块传输编码在WEB安全中的应用</h2><blockquote>
+<p>天创安全研究组-20190524</p>
+</blockquote>
+<h3 id="0x01-分块传输编码概念"><a href="#0x01-分块传输编码概念" class="headerlink" title="0x01 分块传输编码概念"></a>0x01 分块传输编码概念</h3><p>维基百科对分块传输编码的描述：</p>
+<blockquote>
+<p>分块传输编码（Chunked transfer encoding）是超文本传输协议（HTTP）中的一种数据传输机制，允许HTTP由网页服务器发送给客户端应用（ 通常是网页浏览器）的数据可以分成多个部分。分块传输编码只在HTTP协议1.1版本（HTTP/1.1）中提供。（使用HTTP 1.0协议，服务器会主动放弃chunked编码。）</p>
+</blockquote>
+<p>《HTTP权威指南》P373对分块传输编码的解释：</p>
+<p><img src="./1558663477235.png" alt="Alt text"></p>
+<p><img src="./1558663342270.png" alt="Alt text"></p>
+<h3 id="0x02-分块传输编码格式"><a href="#0x02-分块传输编码格式" class="headerlink" title="0x02 分块传输编码格式"></a>0x02 分块传输编码格式</h3><p>标准的分块传输编码格式如下：</p>
+<pre><code>[chunk size][\r\n][chunk data][\r\n][chunk size][\r\n][chunk data][\r\n][chunk size = 0][\r\n][\r\n]
+</code></pre><p>chunk size是以十六进制的ASCII码表示，chunk数据以0长度的chunk块结束，也就是（<code>30 0d 0a 0d 0a</code>）。</p>
+<p>以下格式也可被识别：</p>
+<pre><code>[chunk size;other data][\r\n][chunk data]
+</code></pre><p>其中的分号之后的other data是无关数据。</p>
+<h3 id="0x03-分块传输例子"><a href="#0x03-分块传输例子" class="headerlink" title="0x03 分块传输例子"></a>0x03 分块传输例子</h3><p>一个简单的分块传输HTTP请求如下：</p>
+<pre><code>POST /inject.php HTTP/1.1
+Accept-Encoding: gzip,deflate
+Transfer-Encoding: chunked
+Connection: close
+Accept: */*
+Host: 172.20.10.2:8011
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Content-Length: 48
+
+6;kxebH
+id=123
+b;pAo6m
+12345678911
+0
+</code></pre><p>我们传输的数据主体<code>id=123</code>+<code>12345678911</code>分块后分别是6位和11位，上面的6和b就是块数据长度的16进制数，</p>
+<pre><code>&gt;&gt;&gt; hex(6)
+&apos;0x6&apos;
+&gt;&gt;&gt; hex(11)
+&apos;0xb&apos;
+&gt;&gt;&gt;
+</code></pre><p>我们在服务器输出参数id的值：</p>
+<pre><code>HTTP/1.1 200 OK
+Date: Fri, 24 May 2019 02:17:07 GMT
+Server: Apache/2.4.7 (Ubuntu)
+X-Powered-By: PHP/5.5.9-1ubuntu4.17
+Content-Length: 14
+Connection: close
+Content-Type: text/html
+
+12312345678911
+</code></pre><p><img src="./1558665462044.png" alt="Alt text"></p>
+<p>可见块数据被服务器自动解码合并输出。</p>
+<h3 id="0x04-分块传输应用"><a href="#0x04-分块传输应用" class="headerlink" title="0x04 分块传输应用"></a>0x04 分块传输应用</h3><p>根据分块传输原理，这种发包方式用于Bypass基于流量特征检测的WAF应该会很有作用。<br>以SQL注入攻击为例，我们来分析下sqlmap最新版（2019.5.24下载的）如何利用分块传输绕过WAF进行SQL注入。</p>
+<p><code>lib/core/common.py</code>行5160的<code>chunkSplitPostData()</code>函数实现对数据主体进行分块传输编码：</p>
+<pre><code>def chunkSplitPostData(data):
+    &quot;&quot;&quot;
+    Convert POST data to chunked transfer-encoded data (Note: splitting done by SQL keywords)
+
+    &gt;&gt;&gt; random.seed(0)
+    &gt;&gt;&gt; chunkSplitPostData(&quot;SELECT username,password FROM users&quot;)
+    &apos;5;4Xe90\\r\\nSELEC\\r\\n3;irWlc\\r\\nT u\\r\\n1;eT4zO\\r\\ns\\r\\n5;YB4hM\\r\\nernam\\r\\n9;2pUD8\\r\\ne,passwor\\r\\n3;mp07y\\r\\nd F\\r\\n5;8RKXi\\r\\nROM u\\r\\n4;MvMhO\\r\\nsers\\r\\n0\\r\\n\\r\\n&apos;
+    &quot;&quot;&quot;
+
+    length = len(data)
+    retVal = &quot;&quot;
+    index = 0
+
+    while index &lt; length:
+        chunkSize = randomInt(1)
+
+        if index + chunkSize &gt;= length:
+            chunkSize = length - index
+
+        salt = randomStr(5, alphabet=string.ascii_letters + string.digits)
+
+        while chunkSize:
+            candidate = data[index:index + chunkSize]
+
+            if re.search(r&quot;\b%s\b&quot; % &apos;|&apos;.join(HTTP_CHUNKED_SPLIT_KEYWORDS), candidate, re.I):
+                chunkSize -= 1
+            else:
+                break
+
+        index += chunkSize
+        retVal += &quot;%x;%s\r\n&quot; % (chunkSize, salt)
+        retVal += &quot;%s\r\n&quot; % candidate
+
+    retVal += &quot;0\r\n\r\n&quot;
+
+    return retVal
+</code></pre><p>如上可见，这里严格按照分块传输编码的规范，并对敏感关键词进行分割，敏感关键词在这里定义：</p>
+<p><code>lib/core/settings.py</code>行808：</p>
+<p><img src="./1558666779551.png" alt="Alt text"></p>
+<p>这几个关键词明显不够，我们可以根据自己的需要添加一下。</p>
+<p>对了，还需要添加chunked的请求头，在<code>lib/request/connect.py</code>中：</p>
+<p><img src="./1558666985168.png" alt="Alt text"></p>
+<p>尝试利用他的<code>--chunked</code>参数进行分块传输注入：</p>
+<p><img src="./1558667464398.png" alt="Alt text"></p>
+<p>可见完美注入，再查看TCP流量：</p>
+<p><img src="./1558667442645.png" alt="Alt text"></p>
+<p>SQLMAP实现得很优雅。已经不需要自己来写tamper。</p>
+<h3 id="0x05-分块传输应用场景拓展"><a href="#0x05-分块传输应用场景拓展" class="headerlink" title="0x05 分块传输应用场景拓展"></a>0x05 分块传输应用场景拓展</h3><p>基于HTTP的攻击方式怎么能只局限于SQL注入呢，其实绕过WAF进行XSS、CSRF、SSRF、命令注入等攻击都可以通过分块传输来实现。</p>
+<h4 id="1-代理实现"><a href="#1-代理实现" class="headerlink" title="1. 代理实现"></a>1. 代理实现</h4><p>以XSS为例：<br>使用代理实现请求体更改，已有人实现（<a href="https://github.com/4rat/sqlmap_chunked_proxy）：">https://github.com/4rat/sqlmap_chunked_proxy）：</a></p>
+<p><img src="./1558668481798.png" alt="Alt text"></p>
+<p>运行脚本即监听9999端口，浏览器配置代理127.0.0.1:9999 。</p>
+<p>进行XSS：</p>
+<p><img src="./1558668250894.png" alt="Alt text"></p>
+<p>数据包情况：</p>
+<p><img src="./1558668263796.png" alt="Alt text"></p>
+<p>服务器解析情况：</p>
+<p><img src="./1558668421376.png" alt="Alt text"></p>
+<h4 id="2-burp插件"><a href="#2-burp插件" class="headerlink" title="2. burp插件"></a>2. burp插件</h4><p><a href="https://github.com/c0ny1/chunked-coding-converter">https://github.com/c0ny1/chunked-coding-converter</a></p>
+<p><img src="./1558669112366.png" alt="Alt text"></p>
+<p>下图是一个最原始的XSS攻击数据包，这里尝试进行一次最原生的XSS攻击，流量特征非常明显了：</p>
+<p><img src="./1558669155450.png" alt="Alt text"></p>
+<p>使用插件进行分块传输：<br><img src="./1558669188266.png" alt="Alt text"></p>
+<p>完美X进去：</p>
+<p><img src="./1558669229844.png" alt="Alt text"></p>
+<h3 id="0x06-参考"><a href="#0x06-参考" class="headerlink" title="0x06 参考"></a>0x06 参考</h3><blockquote>
+<ol>
+<li>维基百科：《分块传输编码》</li>
+<li>《HTTP权威指南》</li>
+</ol>
+</blockquote>
